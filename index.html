@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datson — Cybersecurity Tech Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0F14;
+    --panel: #10161D;
+    --line: #232C36;
+    --text: #E7ECF1;
+    --muted: #8B98A5;
+    --accent: #E8A33D;
+    --accent-dim: #6E5527;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.55;
+    min-height:100vh;
+  }
+  .grain{
+    position:fixed; inset:0; pointer-events:none; opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding: 6vh 24px 8vh;
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:64px;
+    min-height:100vh;
+    align-items:start;
+  }
+  @media (max-width: 800px){
+    .wrap{grid-template-columns:1fr; gap:40px; padding: 8vw 20px 10vw;}
+  }
+
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:.02em;
+    margin:0 0 20px;
+    opacity:0;
+    animation: rise .6s ease-out forwards;
+  }
+  .kicker::before{content:"$ "; color:var(--muted);}
+
+  h1{
+    font-family:"Space Grotesk", sans-serif;
+    font-weight:700;
+    font-size: clamp(2.6rem, 6vw, 4.1rem);
+    line-height:1.02;
+    margin:0 0 10px;
+    letter-spacing:-.01em;
+    opacity:0;
+    animation: rise .6s ease-out .08s forwards;
+  }
+
+  .role{
+    font-family:"Space Grotesk", sans-serif;
+    font-weight:500;
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin: 0 0 36px;
+    opacity:0;
+    animation: rise .6s ease-out .16s forwards;
+  }
+
+  .creds{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin: 0 0 44px;
+    opacity:0;
+    animation: rise .6s ease-out .24s forwards;
+  }
+  .cred{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    color:var(--text);
+    border:1px solid var(--line);
+    padding:6px 10px;
+    border-radius:3px;
+    background: var(--panel);
+  }
+  .cred span{color:var(--accent);}
+
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    opacity:0;
+    animation: rise .6s ease-out .32s forwards;
+  }
+  .links a{
+    color:var(--text);
+    text-decoration:none;
+    font-size:15px;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .links a:last-child{border-bottom:none;}
+  .links a:hover, .links a:focus-visible{
+    color: var(--accent);
+    border-color: var(--accent-dim);
+  }
+  .links a .tag{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color:var(--muted);
+  }
+  a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding: 32px;
+  }
+  .panel h2{
+    font-family:"Space Grotesk", sans-serif;
+    font-size:1.05rem;
+    font-weight:600;
+    margin: 0 0 6px;
+  }
+  .panel p.lead{
+    color:var(--muted);
+    font-size:14px;
+    margin: 0 0 28px;
+  }
+
+  label{
+    display:block;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin: 0 0 6px;
+  }
+  .field{ margin-bottom:20px; }
+  input, textarea{
+    width:100%;
+    background: #0B0F14;
+    border:1px solid var(--line);
+    color:var(--text);
+    font-family: inherit;
+    font-size:14px;
+    padding:11px 12px;
+    border-radius:3px;
+    resize:vertical;
+  }
+  input:focus, textarea:focus{
+    outline:none;
+    border-color: var(--accent);
+  }
+  textarea{min-height:120px;}
+
+  button{
+    width:100%;
+    background: var(--accent);
+    color:#1A1206;
+    border:none;
+    font-family:"Space Grotesk", sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:13px 16px;
+    border-radius:3px;
+    cursor:pointer;
+    transition: filter .15s ease, transform .05s ease;
+  }
+  button:hover{ filter:brightness(1.08); }
+  button:active{ transform: translateY(1px); }
+
+  .status{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;
+    margin-top:14px;
+    min-height:16px;
+  }
+  .status.ok{ color:#7CD992; }
+  .status.err{ color:#E5766C; }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .kicker, h1, .role, .creds, .links{ animation:none; opacity:1; }
+  }
+
+  footer{
+    max-width:980px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:11px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<div class="wrap">
+  <div>
+    <p class="kicker">whoami</p>
+    <h1>Datson</h1>
+    <p class="role">Cybersecurity Tech Lead, CitiusTech</p>
+
+    <div class="creds">
+      <span class="cred"><span>CEH</span> Certified Ethical Hacker</span>
+      <span class="cred"><span>ISO/IEC 27001:2013</span> Lead Implementer</span>
+    </div>
+
+    <div class="links">
+      <a href="https://www.linkedin.com/in/datsondavid/" target="_blank" rel="noopener">
+        LinkedIn <span class="tag">/in/datsondavid</span>
+      </a>
+      <a href="https://github.com/HellraiserOne" target="_blank" rel="noopener">
+        GitHub <span class="tag">@HellraiserOne</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Get in touch</h2>
+    <p class="lead">For consulting, collaboration, or a quick hello — drop a note below.</p>
+
+    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="_replyto" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="New message from hellraiser.co.in">
+      <button type="submit">Send message</button>
+      <p class="status" id="form-status"></p>
+    </form>
+  </div>
+</div>
+
+<footer>hellraiser.co.in</footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = 'sending...';
+    status.className = 'status';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = 'message sent — thanks, I\'ll reply soon.';
+        status.className = 'status ok';
+        form.reset();
+      } else {
+        status.textContent = 'something went wrong — please try again.';
+        status.className = 'status err';
+      }
+    } catch (err) {
+      status.textContent = 'network error — please try again.';
+      status.className = 'status err';
+    }
+  });
+</script>
+</body>
+</html>
