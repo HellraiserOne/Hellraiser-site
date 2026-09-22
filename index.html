@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Datson — Cybersecurity Tech Lead</title>
+<title>Datson David — Lead Engineer, Cybersecurity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,6 +11,7 @@
   :root{
     --bg: #0B0F14;
     --panel: #10161D;
+    --panel-2: #0D1319;
     --line: #232C36;
     --text: #E7ECF1;
     --muted: #8B98A5;
@@ -18,252 +19,325 @@
     --accent-dim: #6E5527;
   }
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{
+    margin:0;
     background:var(--bg);
     color:var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height:1.55;
-    min-height:100vh;
+    line-height:1.6;
   }
-  .grain{
-    position:fixed; inset:0; pointer-events:none; opacity:.035;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .wrap{
-    max-width:980px;
-    margin:0 auto;
-    padding: 6vh 24px 8vh;
-    display:grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap:64px;
-    min-height:100vh;
-    align-items:start;
-  }
-  @media (max-width: 800px){
-    .wrap{grid-template-columns:1fr; gap:40px; padding: 8vw 20px 10vw;}
-  }
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  a{ color:inherit; }
 
-  .mono{
-    font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
+  .shell{ max-width: 1040px; margin:0 auto; padding: 0 24px; }
 
-  .kicker{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:13px;
-    color:var(--accent);
-    letter-spacing:.02em;
-    margin:0 0 20px;
-    opacity:0;
-    animation: rise .6s ease-out forwards;
-  }
-  .kicker::before{content:"$ "; color:var(--muted);}
-
-  h1{
-    font-family:"Space Grotesk", sans-serif;
-    font-weight:700;
-    font-size: clamp(2.6rem, 6vw, 4.1rem);
-    line-height:1.02;
-    margin:0 0 10px;
-    letter-spacing:-.01em;
-    opacity:0;
-    animation: rise .6s ease-out .08s forwards;
-  }
-
-  .role{
-    font-family:"Space Grotesk", sans-serif;
-    font-weight:500;
-    font-size: 1.25rem;
-    color: var(--muted);
-    margin: 0 0 36px;
-    opacity:0;
-    animation: rise .6s ease-out .16s forwards;
-  }
-
-  .creds{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin: 0 0 44px;
-    opacity:0;
-    animation: rise .6s ease-out .24s forwards;
-  }
-  .cred{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:12px;
-    color:var(--text);
-    border:1px solid var(--line);
-    padding:6px 10px;
-    border-radius:3px;
-    background: var(--panel);
-  }
-  .cred span{color:var(--accent);}
-
-  .links{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-    opacity:0;
-    animation: rise .6s ease-out .32s forwards;
-  }
-  .links a{
-    color:var(--text);
-    text-decoration:none;
-    font-size:15px;
-    padding:12px 0;
+  nav{
+    position:sticky; top:0; z-index:10;
+    background: rgba(11,15,20,0.85);
+    backdrop-filter: blur(8px);
     border-bottom:1px solid var(--line);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition: color .15s ease, border-color .15s ease;
   }
-  .links a:last-child{border-bottom:none;}
-  .links a:hover, .links a:focus-visible{
-    color: var(--accent);
-    border-color: var(--accent-dim);
+  nav .shell{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 24px;
   }
-  .links a .tag{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:11px;
-    color:var(--muted);
+  nav .brand{ font-family:"IBM Plex Mono", monospace; font-size:14px; color:var(--accent); }
+  nav .links{ display:flex; gap:24px; font-size:13px; }
+  nav .links a{ text-decoration:none; color:var(--muted); transition:color .15s; }
+  nav .links a:hover{ color:var(--text); }
+  @media (max-width:640px){ nav .links{ display:none; } }
+
+  header.hero{
+    padding: 9vh 0 7vh;
+    border-bottom:1px solid var(--line);
   }
-  a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+  .kicker{
+    font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--accent); margin:0 0 18px;
+  }
+  .kicker::before{ content:"$ "; color:var(--muted); }
+  h1{
+    font-family:"Space Grotesk", sans-serif; font-weight:700;
+    font-size: clamp(2.2rem, 5vw, 3.4rem); line-height:1.05; margin:0 0 10px; letter-spacing:-.01em;
+  }
+  .role{
+    font-family:"Space Grotesk", sans-serif; font-weight:500; font-size:1.15rem; color:var(--muted); margin:0 0 6px; max-width:640px;
+  }
+  .loc{ font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted); margin:0 0 28px; }
+  .summary{ max-width:640px; color:var(--text); font-size:15px; margin: 0 0 32px; }
+
+  .links{ display:flex; flex-wrap:wrap; gap:10px; }
+  .links a.pill{
+    font-family:"IBM Plex Mono", monospace; font-size:12.5px;
+    border:1px solid var(--line); background:var(--panel);
+    padding:9px 14px; border-radius:3px; text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+    transition: border-color .15s, color .15s;
+  }
+  .links a.pill:hover{ border-color:var(--accent-dim); color:var(--accent); }
+
+  section{ padding: 6vh 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{
+    display:flex; align-items:baseline; gap:12px; margin:0 0 32px;
+  }
+  .section-head .num{ font-family:"IBM Plex Mono", monospace; color:var(--accent); font-size:13px; }
+  .section-head h2{ font-family:"Space Grotesk", sans-serif; font-size:1.4rem; font-weight:600; margin:0; }
+
+  .exp-item{
+    display:grid; grid-template-columns: 200px 1fr; gap:24px; padding: 22px 0; border-top:1px solid var(--line);
+  }
+  .exp-item:first-child{ border-top:none; }
+  .exp-date{ font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted); padding-top:3px; }
+  .exp-role{ font-family:"Space Grotesk", sans-serif; font-weight:600; font-size:17px; margin:0 0 3px; }
+  .exp-co{ color:var(--accent); font-size:14px; margin:0 0 4px; }
+  .exp-loc{ color:var(--muted); font-size:13px; }
+  @media (max-width:640px){ .exp-item{ grid-template-columns:1fr; gap:6px; } }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  @media (max-width:640px){ .grid2{ grid-template-columns:1fr; } }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tag{
+    font-family:"IBM Plex Mono", monospace; font-size:12px;
+    border:1px solid var(--line); background:var(--panel);
+    padding:7px 11px; border-radius:3px; color:var(--text);
+  }
+
+  .cert-list{ list-style:none; margin:0; padding:0; }
+  .cert-list li{
+    padding:11px 0; border-top:1px solid var(--line); font-size:14px; display:flex; gap:10px; align-items:baseline;
+  }
+  .cert-list li:first-child{ border-top:none; }
+  .cert-list li::before{ content:"▸"; color:var(--accent); font-size:12px; }
+
+  .edu-block{ font-size:15px; }
+  .edu-block .deg{ font-family:"Space Grotesk", sans-serif; font-weight:600; margin-bottom:4px; }
+  .edu-block .school{ color:var(--accent); margin-bottom:4px; }
+  .edu-block .yrs{ font-family:"IBM Plex Mono", monospace; font-size:12px; color:var(--muted); }
 
   .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:4px;
-    padding: 32px;
+    background:var(--panel); border:1px solid var(--line); border-radius:4px; padding: 32px; max-width:560px;
   }
-  .panel h2{
-    font-family:"Space Grotesk", sans-serif;
-    font-size:1.05rem;
-    font-weight:600;
-    margin: 0 0 6px;
-  }
-  .panel p.lead{
-    color:var(--muted);
-    font-size:14px;
-    margin: 0 0 28px;
-  }
-
-  label{
-    display:block;
-    font-family:"IBM Plex Mono", monospace;
-    font-size:11px;
-    color:var(--muted);
-    margin: 0 0 6px;
-  }
-  .field{ margin-bottom:20px; }
+  .panel h2{ font-family:"Space Grotesk", sans-serif; font-size:1.1rem; font-weight:600; margin:0 0 6px; }
+  .panel p.lead{ color:var(--muted); font-size:14px; margin:0 0 26px; }
+  label{ display:block; font-family:"IBM Plex Mono", monospace; font-size:11px; color:var(--muted); margin:0 0 6px; }
+  .field{ margin-bottom:18px; }
   input, textarea{
-    width:100%;
-    background: #0B0F14;
-    border:1px solid var(--line);
-    color:var(--text);
-    font-family: inherit;
-    font-size:14px;
-    padding:11px 12px;
-    border-radius:3px;
-    resize:vertical;
+    width:100%; background:#0B0F14; border:1px solid var(--line); color:var(--text);
+    font-family:inherit; font-size:14px; padding:11px 12px; border-radius:3px; resize:vertical;
   }
-  input:focus, textarea:focus{
-    outline:none;
-    border-color: var(--accent);
-  }
-  textarea{min-height:120px;}
-
+  input:focus, textarea:focus{ outline:none; border-color:var(--accent); }
+  textarea{ min-height:110px; }
   button{
-    width:100%;
-    background: var(--accent);
-    color:#1A1206;
-    border:none;
-    font-family:"Space Grotesk", sans-serif;
-    font-weight:600;
-    font-size:14px;
-    padding:13px 16px;
-    border-radius:3px;
-    cursor:pointer;
-    transition: filter .15s ease, transform .05s ease;
+    width:100%; background:var(--accent); color:#1A1206; border:none;
+    font-family:"Space Grotesk", sans-serif; font-weight:600; font-size:14px;
+    padding:13px 16px; border-radius:3px; cursor:pointer; transition:filter .15s;
   }
   button:hover{ filter:brightness(1.08); }
-  button:active{ transform: translateY(1px); }
-
-  .status{
-    font-family:"IBM Plex Mono", monospace;
-    font-size:12px;
-    margin-top:14px;
-    min-height:16px;
-  }
+  .status{ font-family:"IBM Plex Mono", monospace; font-size:12px; margin-top:12px; min-height:16px; }
   .status.ok{ color:#7CD992; }
   .status.err{ color:#E5766C; }
+  .direct-contact{ margin-top:22px; padding-top:22px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+  .direct-contact a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line); }
+  .direct-contact a:hover{ color:var(--accent); border-color:var(--accent-dim); }
 
-  @keyframes rise{
-    from{ opacity:0; transform: translateY(10px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .kicker, h1, .role, .creds, .links{ animation:none; opacity:1; }
-  }
-
-  footer{
-    max-width:980px;
-    margin: 0 auto;
-    padding: 0 24px 40px;
-    font-family:"IBM Plex Mono", monospace;
-    font-size:11px;
-    color: var(--muted);
-  }
+  footer{ padding: 32px 0; font-family:"IBM Plex Mono", monospace; font-size:11px; color:var(--muted); }
 </style>
 </head>
 <body>
-<div class="grain"></div>
 
-<div class="wrap">
-  <div>
-    <p class="kicker">whoami</p>
-    <h1>Datson</h1>
-    <p class="role">Cybersecurity Tech Lead, CitiusTech</p>
-
-    <div class="creds">
-      <span class="cred"><span>CEH</span> Certified Ethical Hacker</span>
-      <span class="cred"><span>ISO/IEC 27001:2013</span> Lead Implementer</span>
-    </div>
-
+<nav>
+  <div class="shell">
+    <div class="brand">datson://portfolio</div>
     <div class="links">
-      <a href="https://www.linkedin.com/in/datsondavid/" target="_blank" rel="noopener">
-        LinkedIn <span class="tag">/in/datsondavid</span>
-      </a>
-      <a href="https://github.com/HellraiserOne" target="_blank" rel="noopener">
-        GitHub <span class="tag">@HellraiserOne</span>
-      </a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
+</nav>
 
-  <div class="panel">
-    <h2>Get in touch</h2>
-    <p class="lead">For consulting, collaboration, or a quick hello — drop a note below.</p>
-
-    <form id="contact-form" action="https://formspree.io/f/mzezragw" method="POST">
-      <div class="field">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="field">
-        <label for="email">Your email</label>
-        <input type="email" id="email" name="_replyto" required>
-      </div>
-      <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
-      <input type="hidden" name="_subject" value="New message from hellraiser.co.in">
-      <button type="submit">Send message</button>
-      <p class="status" id="form-status"></p>
-    </form>
+<header class="hero">
+  <div class="shell">
+    <p class="kicker">whoami</p>
+    <h1>Datson David</h1>
+    <p class="role">Lead Engineer — Cybersecurity @ CitiusTech · Bridging Information Security, Risk Management &amp; Product Strategy</p>
+    <p class="loc">Mumbai, Maharashtra, India</p>
+    <p class="summary">Result-oriented IT and cybersecurity professional with 10+ years of experience helping organizations secure their digital ecosystems and achieve regulatory compliance. Background spans hands-on engineering, cybersecurity management, and consulting — designing and delivering end-to-end security solutions that are practical, auditable, and scalable. Open to conversations on cloud security, compliance modernization, and AI-enabled productivity in the Microsoft 365 ecosystem.</p>
+    <div class="links">
+      <a class="pill" href="https://www.linkedin.com/in/datsondavid/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="pill" href="https://github.com/HellraiserOne" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="pill" href="mailto:datsondavid37@gmail.com">Email ↗</a>
+    </div>
   </div>
-</div>
+</header>
 
-<footer>hellraiser.co.in</footer>
+<section id="about">
+  <div class="shell">
+    <div class="section-head"><span class="num">01</span><h2>Top Skills</h2></div>
+    <div class="tag-row">
+      <span class="tag">Cloud Security</span>
+      <span class="tag">ISO Standards</span>
+      <span class="tag">Technical Project Leadership</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="shell">
+    <div class="section-head"><span class="num">02</span><h2>Experience</h2></div>
+
+    <div class="exp-item">
+      <div class="exp-date mono">Apr 2026 — Present</div>
+      <div>
+        <p class="exp-role">Lead Engineer II — Cybersecurity</p>
+        <p class="exp-co">CitiusTech</p>
+        <p class="exp-loc">Mumbai</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Nov 2024 — Apr 2026</div>
+      <div>
+        <p class="exp-role">Technical Lead — Cybersecurity</p>
+        <p class="exp-co">CitiusTech</p>
+        <p class="exp-loc">Mumbai</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Feb 2023 — Nov 2024</div>
+      <div>
+        <p class="exp-role">Cyber Security Manager, APAC</p>
+        <p class="exp-co">Colliers</p>
+        <p class="exp-loc">Mumbai, Maharashtra, India</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Mar 2022 — Feb 2023</div>
+      <div>
+        <p class="exp-role">Cyber Security Consultant</p>
+        <p class="exp-co">Capgemini</p>
+        <p class="exp-loc">Mumbai, Maharashtra, India</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Dec 2019 — Mar 2022</div>
+      <div>
+        <p class="exp-role">Associate Consultant</p>
+        <p class="exp-co">Capgemini</p>
+        <p class="exp-loc">Mumbai</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Jun 2018 — Dec 2019</div>
+      <div>
+        <p class="exp-role">Security Engineer (IT &amp; Cybersecurity)</p>
+        <p class="exp-co">AmbiSure Technologies Pvt. Ltd.</p>
+        <p class="exp-loc">Mumbai, India</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Jul 2017 — Apr 2018</div>
+      <div>
+        <p class="exp-role">Technical Support Engineer (L3)</p>
+        <p class="exp-co">Concentrix</p>
+        <p class="exp-loc">Mumbai Area, India</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Apr 2016 — Jul 2017</div>
+      <div>
+        <p class="exp-role">Consultant</p>
+        <p class="exp-co">Sutherland</p>
+        <p class="exp-loc">Mumbai Area, India</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date mono">Jun 2015 — Sep 2015</div>
+      <div>
+        <p class="exp-role">Intern</p>
+        <p class="exp-co">Tata Consultancy Services</p>
+        <p class="exp-loc">Mumbai Area, India</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="shell">
+    <div class="section-head"><span class="num">03</span><h2>Certifications &amp; Languages</h2></div>
+    <div class="grid2">
+      <div>
+        <ul class="cert-list">
+          <li>CEH — Certified Ethical Hacker</li>
+          <li>ISO/IEC 27001:2013 Lead Implementer</li>
+          <li>ISO/IEC 27017:2015 — Information Security Controls for Cloud Services</li>
+          <li>ChatGPT Solutions Practitioner</li>
+          <li>Codex Solutions Practitioner</li>
+          <li>Programming in C# Jump Start</li>
+          <li>Delivering an Authentic Elevator Pitch</li>
+        </ul>
+      </div>
+      <div>
+        <div class="tag-row">
+          <span class="tag">English</span>
+          <span class="tag">Hindi</span>
+          <span class="tag">Malayalam</span>
+          <span class="tag">Marathi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="shell">
+    <div class="section-head"><span class="num">04</span><h2>Education</h2></div>
+    <div class="edu-block">
+      <p class="deg">Bachelor of Science, Information Technology</p>
+      <p class="school">University of Mumbai</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="shell">
+    <div class="section-head"><span class="num">05</span><h2>Get in touch</h2></div>
+
+    <div class="panel">
+      <h2>Let's connect</h2>
+      <p class="lead">Open to conversations on cloud security, compliance, and cybersecurity leadership roles.</p>
+
+      <form id="contact-form" action="https://formspree.io/f/mzezragw" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="_replyto" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New message from hellraiser.co.in">
+        <button type="submit">Send message</button>
+        <p class="status" id="form-status"></p>
+      </form>
+
+      <div class="direct-contact">
+        Prefer email directly? <a href="mailto:datsondavid37@gmail.com">datsondavid37@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">hellraiser.co.in</div>
+</footer>
 
 <script>
   const form = document.getElementById('contact-form');
@@ -279,7 +353,7 @@
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        status.textContent = 'message sent — thanks, I\'ll reply soon.';
+        status.textContent = "message sent — I'll reply soon.";
         status.className = 'status ok';
         form.reset();
       } else {
